@@ -44,13 +44,17 @@ if not os.path.exists('MacKernelSDK'):
     subprocess.run(['git', 'clone', 'https://github.com/acidanthera/MacKernelSDK.git'], capture_output=not args.verbose)
 
 
-firmwares = [fw[:-4] for fw in os.listdir('IntelBluetoothFirmware/fw') if not fw.endswith('.ddc')]
+firmwares = [os.path.splitext(fw)[0] for fw in os.listdir('IntelBluetoothFirmware/fw') if not fw.endswith('.ddc')]
 
 for firmware in firmwares:
+    if os.path.exists('IntelBluetoothFirmware/FwBinary.cpp'):
+        print('Detected FwBinary.cpp. Removing it as it may contain old compressed firmwares...\n')
+        subprocess.run(['rm','IntelBluetoothFirmware/FwBinary.cpp'], capture_output=not args.verbose)
     print(f'Building IntelBluetoothFirmware for {firmware}...\n')
-    subprocess.run(['find', 'IntelBluetoothFirmware/fw', '-type', 'f', '-not', '-name', '{firmware}.*', '-delete'], capture_output=not args.verbose)
+    subprocess.run(['find', 'IntelBluetoothFirmware/fw', '-type', 'f', '-not', '-name', f'{firmware}.*', '-delete'], capture_output=not args.verbose)
     subprocess.run(['xcodebuild', '-project', 'IntelBluetoothFirmware.xcodeproj', '-target', 'IntelBluetoothFirmware', '-configuration', 'Release', '-sdk', 'macosx'], capture_output=not args.verbose)
     subprocess.run(['zip', '-r', f'build/Release/{firmware}.zip', '-D', 'build/Release/', '-x', 'build/Release/IntelBluetoothFirmware.kext.dSYM'], capture_output=not args.verbose)
     subprocess.run(['mv', f'build/Release/{firmware}.zip', '../Kexts'], capture_output=not args.verbose)
     subprocess.run(['git', 'reset', '--hard', 'HEAD'], capture_output=not args.verbose)
     subprocess.run(['rm', '-rf', 'build'], capture_output=not args.verbose)
+
