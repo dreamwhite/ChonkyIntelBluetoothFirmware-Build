@@ -33,6 +33,11 @@ In my case, the firmware version is `ibt-17-16-1.sfi`
 4. Clone MacKernelSDK onto `$(source)` with `git clone https://github.com/acidanthera/MacKernelSDK.git`.
 5. Open XCode and build the project with `Release` configuration using `⇧⌘R` and after it finishes building the project, replace the old `IntelBluetoothFirmware.kext` with the newly generated
 
+# How to generate every single firmware
+
+Run `python3 main.py` and see the magic happen.
+Created kexts will be in `Kexts` folder
+
 # Credits
 
 - [Apple](https://apple.com) for [XCode](https://developer.apple.com/xcode/) and [IORegistryExplorer](https://github.com/utopia-team/IORegistryExplorer)
