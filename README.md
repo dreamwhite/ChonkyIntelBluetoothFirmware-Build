@@ -11,7 +11,7 @@ The following guide will help you light that chonk `IntelBluetoothFirmware.kext`
 
 ## How to proceed
 
-After making sure that IntelBluetoothFirmware stock kext works without any additional edit you can light the firmware from ~ 7.2MB to 26KB :)
+After making sure that IntelBluetoothFirmware stock kext works without any additional edit you can light the firmware from ~ 7.2MB to less than 1MB :)
 
 
 ### Identify your firmware version
