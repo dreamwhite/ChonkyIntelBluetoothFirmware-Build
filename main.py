@@ -48,7 +48,7 @@ firmwares = [os.path.splitext(fw)[0] for fw in os.listdir('IntelBluetoothFirmwar
 
 for firmware in firmwares:
     if os.path.exists('IntelBluetoothFirmware/FwBinary.cpp'):
-        print('Detected FwBinary.cpp. Removing it as it may contain old compressed firmwares...\n')
+        print('Detected FwBinary.cpp. Removing it as it may contain old compressed firmware...\n')
         subprocess.run(['rm','IntelBluetoothFirmware/FwBinary.cpp'], capture_output=not args.verbose)
     print(f'Building IntelBluetoothFirmware for {firmware}...\n')
     subprocess.run(['find', 'IntelBluetoothFirmware/fw', '-type', 'f', '-not', '-name', f'{firmware}.*', '-delete'], capture_output=not args.verbose)
