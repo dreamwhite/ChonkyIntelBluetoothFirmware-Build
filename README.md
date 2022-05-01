@@ -27,6 +27,7 @@ In my case, the firmware version is `ibt-17-16-1.sfi`
 1. Clone IntelBluetoothFirmware and open the source project
 2. Remove `FwBinary.cpp` from `$(source)/IntelBluetoothFirmware/IntelBluetoothFirmware` as it contains already compressed firmware files
 3. Remove every firmware file in `$(source)/IntelBluetoothFirmware/IntelBluetoothFirmware/fw` except the one which name starts with the previously identified firmware name (e.g. in my case `ibt-17-16-1.sfi` and `ibt-17-16-1.ddc`)
+    - please note that some firmware may have a similar name from the one identified via IORegistryExplorer: choose the one that has the closest name
 
 ![](/.assets/images/firmware.png)
 
